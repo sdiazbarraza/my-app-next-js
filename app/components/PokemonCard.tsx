@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import React from 'react';
 import Image from "next/image";
-import { getPokemonDetails } from "../utils/api/getPokemonDetails";
+import { getPicture } from "../utils/api/getPokemonDetails";
 
 
 interface PokemonCardProps {
@@ -13,20 +13,20 @@ interface PokemonCardProps {
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
-  const [data, setData] = useState(null);
+  const [picture, setPicture] = useState("");
 
   useEffect(() => {
-    const fetchData = async () => {
-      const fetchedData = await getPokemonDetails(pokemon.url);
-      setData(fetchedData);
+    const fetchPicture = async () => {
+      const fetchedPicture = await getPicture(pokemon.name);
+      setPicture(fetchedPicture);
     };
-    fetchData();
+    fetchPicture();
     }, [pokemon.url]);
   return (
     <li>
-      <a href="/details" target="_blank" rel="noopener noreferrer">
+      <a href={`/pokemon/${pokemon.name}/details`} target="_blank" rel="noopener noreferrer">
         {pokemon.name}
-        <Image src={data?.sprites.front_default} alt={pokemon.name} width={100} height={100} />
+        {picture && <Image src={picture} alt={pokemon.name} width={100} height={100} />}        
       </a>
     </li>
   );
