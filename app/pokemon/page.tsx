@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import PokemonCard from "../components/PokemonCard"; // Import the 'PokemonCard' component
 
 export default  function Home() {
-  const [pokemons, setPokemons] = useState(null);
+  const [pokemons, setPokemons] = useState<any[] | null>(null);
 
   
   useEffect(() => {
@@ -20,7 +20,7 @@ export default  function Home() {
 
   return (
     <ul>
-      {pokemons.map((pokemon) => (
+      {pokemons.map((pokemon: any) => (
         <PokemonCard pokemon={pokemon} /> // Use the 'PokemonCard' component
       ))}
     </ul>
