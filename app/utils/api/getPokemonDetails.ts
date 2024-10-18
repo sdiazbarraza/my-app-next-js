@@ -1,7 +1,7 @@
 import {cache} from "react";
  async function fetchPokemonDetails(name: string) {
     try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}/`);
+        const response = await fetch(process.env.NEXT_PUBLIC_URL_POKEMON_BASE + name);
         if (!response.ok) {
           throw new Error("failed to fetch");
         }
