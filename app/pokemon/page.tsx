@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react';
 import PokemonCard from "../components/PokemonCard"; // Import the 'PokemonCard' component
+import { getPokemons } from '../utils/api/getPokemons';
 
 export default  function Home() {
   const [pokemons, setPokemons] = useState<any[] | null>(null);
@@ -8,9 +9,8 @@ export default  function Home() {
   
   useEffect(() => {
     async function fetchData() {
-      let res = await fetch('https://pokeapi.co/api/v2/pokemon/');
-      let data = await res.json();
-      setPokemons(data.results);
+      let res = await getPokemons();
+      setPokemons(res.results);
     }
     fetchData();
     
