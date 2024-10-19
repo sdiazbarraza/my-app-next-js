@@ -21,7 +21,27 @@ export default function Details({ params }: PokemonParams) {
       fetchData();   
     }, [pokemonName]);
 
-  return <h1>Details page {pokemon?.name}</h1>
+  return (
+    <>
+      {
+        !pokemon && <div>Loading...</div>
+      }
+      {pokemon && (
+        <>
+          <h1>Detail's {pokemon.name}</h1>
+          <h2>Weight: {pokemon.weight}</h2>          
+          <h2>Abilities</h2>
+          {pokemon.abilities.map((ability: any) => (
+            <li key={ability.ability.name}>{ability.ability.name}</li>
+          ))}
+          <h2>Type</h2>
+          {pokemon.types.map((type: any) => (
+            <li key={type.type.name}>{type.type.name}</li>
+          ))}
+        </>
+      )}
+    </>
+  ); 
 }
 
 
